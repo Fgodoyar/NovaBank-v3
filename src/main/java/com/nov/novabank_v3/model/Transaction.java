@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "account")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "Transactions")
 public class Transaction {
@@ -20,19 +22,15 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long transaction_id;
 
-    @NotNull
     @Column
     private String transaction_type;
 
-    @NotNull
     @Column
     private BigDecimal amount;
 
-    @NotNull
     @Column
     private String description;
 
-    @NotNull
     @Column
     private LocalDateTime creation_date;
 
@@ -40,11 +38,11 @@ public class Transaction {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    public Transaction(String transaction_type, BigDecimal amount, String description, LocalDateTime creation_date, Account account) {
+    public Transaction(Long transaction_id, String transaction_type, BigDecimal amount, String description) {
+        this.transaction_id = transaction_id;
         this.transaction_type = transaction_type;
         this.amount = amount;
         this.description = description;
-        this.creation_date = creation_date;
-        this.account = account;
+        this.creation_date = LocalDateTime.now();
     }
 }

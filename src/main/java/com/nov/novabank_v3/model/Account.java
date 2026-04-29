@@ -1,7 +1,6 @@
 package com.nov.novabank_v3.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -13,6 +12,8 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"customer", "transactions"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "Accounts")
 public class Account {
@@ -21,19 +22,15 @@ public class Account {
     @Column(name = "account_id")
     private Long account_id;
 
-    @NotNull
     @Column
     private String account_number;
 
-    @NotNull
     @Column
     private String account_holder;
 
-    @NotNull
     @Column
     private BigDecimal balance;
 
-    @NotNull
     @Column
     private LocalDateTime creation_date;
 
@@ -41,11 +38,14 @@ public class Account {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Transaction> transactions;
 
-    @PrePersist
-    public void prePersist() {
+    public Account(Long account_id, String account_number, String account_holder, BigDecimal balance) {
+        this.account_id = account_id;
+        this.account_number = account_number;
+        this.account_holder = account_holder;
+        this.balance = balance;
         this.creation_date = LocalDateTime.now();
     }
 }

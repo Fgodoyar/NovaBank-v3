@@ -1,8 +1,6 @@
 package com.nov.novabank_v3.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -13,6 +11,8 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "accounts")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "Customers")
 public class Customer {
@@ -21,28 +21,21 @@ public class Customer {
     @Column(name = "customer_id")
     private Long customer_id;
 
-    @NotNull
     @Column
     private String customer_name;
 
-    @NotNull
     @Column
-    private String last_name;
+    private String lastname;
 
-    @NotNull
     @Column
     private String dni;
 
-    @NotNull
     @Column
-    @Email
     private String email;
 
-    @NotNull
     @Column
     private String phone_number;
 
-    @NotNull
     @Column
     private LocalDateTime creation_date;
 
@@ -52,5 +45,14 @@ public class Customer {
     @PrePersist
     public void prePersist() {
         this.creation_date = LocalDateTime.now();
+    }
+
+    public Customer(Long customer_id, String customer_name, String lastname, String dni, String email, String phone_number) {
+        this.customer_id = customer_id;
+        this.customer_name = customer_name;
+        this.lastname = lastname;
+        this.dni = dni;
+        this.email = email;
+        this.phone_number = phone_number;
     }
 }
