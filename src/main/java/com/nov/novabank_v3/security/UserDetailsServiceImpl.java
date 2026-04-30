@@ -18,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return User.builder()
                 .username("admin")
-                .password(new BCryptPasswordEncoder().encode("passwd"))
+                .password(new BCryptPasswordEncoder().encode("password"))
                 .roles("ADMIN")
                 .build();
     }
