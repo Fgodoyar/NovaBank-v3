@@ -1,6 +1,7 @@
 package com.nov.novabank_v3.service;
 
 import com.nov.novabank_v3.dto.AccountDTO;
+import com.nov.novabank_v3.exception.AccountNotFoundException;
 import com.nov.novabank_v3.exception.CustomerNotFoundException;
 import com.nov.novabank_v3.mapper.AccountMapper;
 import com.nov.novabank_v3.model.Account;
@@ -43,7 +44,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDTO findByAccountNumber(String accountNumber) {
         Account account = accountRepository.findByAccountNumber(accountNumber)
-                .orElseThrow(() -> new IllegalArgumentException("No se ha encontrado la cuenta con número: " + accountNumber));
+                .orElseThrow(() -> new AccountNotFoundException(accountNumber));
         return accountMapper.toDTO(account);
     }
 
