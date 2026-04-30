@@ -41,11 +41,4 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Transaction> transactions;
 
-    public Account(Long account_id, String account_number, String account_holder, BigDecimal balance) {
-        this.account_id = account_id;
-        this.account_number = account_number;
-        this.account_holder = account_holder;
-        this.balance = balance;
-        this.creation_date = LocalDateTime.now();
-    }
 }

@@ -47,12 +47,4 @@ public class Customer {
         this.creation_date = LocalDateTime.now();
     }
 
-    public Customer(Long customer_id, String customer_name, String lastname, String dni, String email, String phone_number) {
-        this.customer_id = customer_id;
-        this.customer_name = customer_name;
-        this.lastname = lastname;
-        this.dni = dni;
-        this.email = email;
-        this.phone_number = phone_number;
-    }
 }

@@ -38,11 +38,4 @@ public class Transaction {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    public Transaction(Long transaction_id, String transaction_type, BigDecimal amount, String description) {
-        this.transaction_id = transaction_id;
-        this.transaction_type = transaction_type;
-        this.amount = amount;
-        this.description = description;
-        this.creation_date = LocalDateTime.now();
-    }
 }
