@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "NovaBank",
+                title = "NovaBank API",
                 version = "3.0",
                 description = "API REST de gestión bancaria"
         ),
