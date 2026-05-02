@@ -3,9 +3,9 @@ spring:
     name: novabank-v3
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/novabank
+    url: jdbc:postgresql://localhost:5432/NovaBank
     username: postgres
-    password: postgres
+    password: sF0I+S2K2X4c
     driver-class-name: org.postgresql.Driver
 
   jpa:

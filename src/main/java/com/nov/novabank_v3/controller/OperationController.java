@@ -5,18 +5,21 @@ import com.nov.novabank_v3.dto.TransactionDTO;
 import com.nov.novabank_v3.dto.TransferDTO;
 import com.nov.novabank_v3.service.OperationService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/operations")
-@RequiredArgsConstructor
 public class OperationController {
 
-    private final OperationService operationService;
+    @Autowired
+    private OperationService operationService;
 
     @PostMapping("/deposit")
     public ResponseEntity<TransactionDTO> deposit(@Valid @RequestBody OperationDTO dto) {

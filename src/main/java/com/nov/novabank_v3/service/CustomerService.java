@@ -8,8 +8,7 @@ import java.util.List;
 @Service
 public interface CustomerService {
     List<CustomerDTO> listCustomers();
-    CustomerDTO getCustomer(Long id);
+    CustomerDTO findById(Long customerId);
     CustomerDTO createCustomer(CustomerDTO dto);
     CustomerDTO findByDni(String dni);
-    CustomerDTO findByEmail(String email);
 }

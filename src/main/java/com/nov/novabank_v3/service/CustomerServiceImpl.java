@@ -28,9 +28,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional(readOnly = true)
     @Override
-    public CustomerDTO getCustomer(Long id) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException("Cliente no encontrado: " + id));
+    public CustomerDTO findById(Long customerId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException("Cliente no encontrado: " + customerId));
         return customerMapper.toDTO(customer);
     }
 
@@ -56,14 +56,6 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDTO findByDni(String dni) {
         Customer customer = customerRepository.findByDni(dni)
                 .orElseThrow(() -> new CustomerNotFoundException("Cliente no encontrado: " + dni));
-        return customerMapper.toDTO(customer);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public CustomerDTO findByEmail(String email) {
-        Customer customer = customerRepository.findByEmail(email)
-                .orElseThrow(() -> new CustomerNotFoundException("Cliente no encontrado: " + email));
         return customerMapper.toDTO(customer);
     }
 

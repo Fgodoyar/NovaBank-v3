@@ -25,7 +25,7 @@ public class Customer {
     private String customer_name;
 
     @Column
-    private String lastname;
+    private String last_name;
 
     @Column
     private String dni;
