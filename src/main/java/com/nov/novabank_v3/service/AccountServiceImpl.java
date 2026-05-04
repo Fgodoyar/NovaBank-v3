@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -25,17 +26,30 @@ public class AccountServiceImpl implements AccountService {
 
     @Transactional
     @Override
-    public AccountDTO createAccount(AccountDTO dto) {
-        Customer customer = customerRepository.findById(dto.getCustomer_id())
-                .orElseThrow(() -> new CustomerNotFoundException("Cliente no encontrado: " + dto.getCustomer_id()));
-        Account saved = accountRepository.save(accountMapper.toEntity(dto));
+    public AccountDTO createAccount(Long customerId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException("Cliente no encontrado: " + customerId));
+        if (accountRepository.existsByCustomerCustomerId(customer.getCustomerId())) {
+            throw new IllegalArgumentException("El cliente ya tiene una cuenta registrada");
+        }
+        String accountNumber = generateAccountNumber();
+
+        AccountDTO accountDTO = AccountDTO.builder()
+                .account_number(accountNumber)
+                .account_holder(customer.getCustomer_name())
+                .customer_id(customer.getCustomerId())
+                .balance(BigDecimal.ZERO)
+                .build();
+
+        Account saved = accountRepository.save(accountMapper.toEntity(accountDTO));
+
         return accountMapper.toDTO(saved);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<AccountDTO> findByCustomerId(Long customerId) {
-        return accountRepository.findByCustomerId(customerId).stream()
+        return accountRepository.findByCustomerCustomerId(customerId).stream()
                 .map(accountMapper::toDTO)
                 .collect(Collectors.toList());
     }

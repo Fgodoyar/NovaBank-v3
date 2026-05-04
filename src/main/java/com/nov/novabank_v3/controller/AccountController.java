@@ -5,7 +5,6 @@ import com.nov.novabank_v3.service.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,16 +24,17 @@ public class AccountController {
     @Operation(summary = "Crear nueva cuenta",
             description = "Crea una cuenta bancaria asociada a un cliente existente.")
     @ApiResponse(responseCode = "201", description = "Cuenta creada correctamente")
+    @ApiResponse(responseCode = "400", description = "El cliente ya tiene una cuenta registrada")
     @ApiResponse(responseCode = "404", description = "Cliente no encontrado")
-    public ResponseEntity<AccountDTO> createAccount(@Valid @RequestBody AccountDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(accountService.createAccount(dto));
+    public ResponseEntity<AccountDTO> createAccount(@RequestParam Long customerId) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(accountService.createAccount(customerId));
     }
 
     @GetMapping("/customer/{customerId}")
     @Operation(summary = "Listar cuentas por cliente",
             description = "Devuelve todas las cuentas asociadas a un cliente.")
     @ApiResponse(responseCode = "200", description = "Lista de cuentas obtenida")
-    @ApiResponse(responseCode = "404", description = "Cliente no encontrado")
+    @ApiResponse(responseCode = "404", description = "Cuenta no encontrado")
     public ResponseEntity<List<AccountDTO>> findByCustomerId(@PathVariable Long customerId) {
         return ResponseEntity.ok(accountService.findByCustomerId(customerId));
     }
@@ -52,6 +52,7 @@ public class AccountController {
     @Operation(summary = "Cuentas con transacciones",
             description = "Devuelve las cuentas de un cliente incluyendo sus movimientos.")
     @ApiResponse(responseCode = "200", description = "Cuentas con movimientos obtenidas")
+    @ApiResponse(responseCode = "404", description = "Cuenta no encontrada")
     public ResponseEntity<List<AccountDTO>> findByCustomerIdWithTransactions(@PathVariable Long customerId) {
         return ResponseEntity.ok(accountService.findByCustomerIdWithTransactions(customerId));
     }

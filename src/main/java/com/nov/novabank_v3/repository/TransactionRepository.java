@@ -5,10 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    List<Transaction> findByAccountId(Long accountId);
-    List<Transaction> findByAccountIdAndCreationDateBetweenOrderByCreationDateDesc(Long accountId, LocalDate startDate, LocalDate endDate);
+    List<Transaction> findByAccount_AccountId(Long account_id);
+    List<Transaction> findByAccount_AccountIdAndCreationDateBetweenOrderByCreationDateDesc(Long account_id, LocalDateTime startDate, LocalDateTime endDate);
 }

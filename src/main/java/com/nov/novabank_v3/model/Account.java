@@ -20,19 +20,19 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_id")
-    private Long account_id;
+    private Long accountId;
 
-    @Column
-    private String account_number;
+    @Column(name = "account_number")
+    private String accountNumber;
 
-    @Column
-    private String account_holder;
+    @Column(name = "account_holder")
+    private String accountHolder;
 
     @Column
     private BigDecimal balance;
 
-    @Column
-    private LocalDateTime creation_date;
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")

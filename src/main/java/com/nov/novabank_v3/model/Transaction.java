@@ -1,7 +1,6 @@
 package com.nov.novabank_v3.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -20,10 +19,10 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaction_id")
-    private Long transaction_id;
+    private Long transactionId;
 
-    @Column
-    private String transaction_type;
+    @Column(name = "transaction_type")
+    private String transactionType;
 
     @Column
     private BigDecimal amount;
@@ -31,8 +30,8 @@ public class Transaction {
     @Column
     private String description;
 
-    @Column
-    private LocalDateTime creation_date;
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")

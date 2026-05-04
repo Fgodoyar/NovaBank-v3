@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -39,8 +40,8 @@ public class TransactionController {
     @ApiResponse(responseCode = "200", description = "Transacciones obtenidas correctamente")
     @ApiResponse(responseCode = "404", description = "Cuenta no encontrada")
     public ResponseEntity<List<TransactionDTO>> findByAccountIdAndCreationDateBetweenOrderByCreationDateDesc
-            (@PathVariable("accountId") Long accountId, @PathVariable("startDate") LocalDate startDate,
-             @PathVariable("endDate") LocalDate endDate) {
+            (@PathVariable("accountId") Long accountId, @PathVariable("startDate") LocalDateTime startDate,
+             @PathVariable("endDate") LocalDateTime endDate) {
         return ResponseEntity.ok(transactionService.findByAccountIdAndCreationDateBetweenOrderByCreationDateDesc(accountId, startDate, endDate));
     }
 }

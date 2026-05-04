@@ -34,7 +34,7 @@ public class OperationServiceImpl implements OperationService {
         account.setBalance(account.getBalance().add(amount));
         accountRepository.save(account);
 
-        TransactionDTO transactionDTO = TransactionFactory.createDeposit(account.getAccount_id(), amount);
+        TransactionDTO transactionDTO = TransactionFactory.createDeposit(account.getAccountId(), amount);
         transactionRepository.save(transactionMapper.toEntity(transactionDTO));
 
         return transactionDTO;
@@ -50,13 +50,13 @@ public class OperationServiceImpl implements OperationService {
         }
 
         if (account.getBalance().compareTo(amount) < 0) {
-            throw new InsufficientBalanceException(account.getAccount_number(), account.getBalance(), amount);
+            throw new InsufficientBalanceException(account.getAccountNumber(), account.getBalance(), amount);
         }
 
         account.setBalance(account.getBalance().subtract(amount));
         accountRepository.save(account);
 
-        TransactionDTO transactionDTO = TransactionFactory.createWithdrawal(account.getAccount_id(), amount);
+        TransactionDTO transactionDTO = TransactionFactory.createWithdrawal(account.getAccountId(), amount);
         transactionRepository.save(transactionMapper.toEntity(transactionDTO));
 
         return transactionDTO;
@@ -68,7 +68,7 @@ public class OperationServiceImpl implements OperationService {
         Account sourceAccount = findAccountByNumber(fromAccountNumber);
         Account destinationAccount = findAccountByNumber(toAccountNumber);
 
-        if (sourceAccount.getAccount_number().equals(toAccountNumber)) {
+        if (sourceAccount.getAccountNumber().equals(toAccountNumber)) {
             throw new IllegalArgumentException("La cuenta origen no puede ser igual a la cuenta destino.");
         }
 
@@ -77,7 +77,7 @@ public class OperationServiceImpl implements OperationService {
         }
 
         if (sourceAccount.getBalance().compareTo(amount) < 0) {
-            throw new InsufficientBalanceException(sourceAccount.getAccount_number(), sourceAccount.getBalance(), amount);
+            throw new InsufficientBalanceException(sourceAccount.getAccountNumber(), sourceAccount.getBalance(), amount);
         }
 
         sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
@@ -87,10 +87,10 @@ public class OperationServiceImpl implements OperationService {
         accountRepository.save(destinationAccount);
 
         TransactionDTO outgoingDTO = TransactionFactory.createOutgoingTransfer(
-                sourceAccount.getAccount_id(), amount, destinationAccount.getAccount_number());
+                sourceAccount.getAccountId(), amount, destinationAccount.getAccountNumber());
 
         TransactionDTO incomingDTO = TransactionFactory.createIncomingTransfer(
-                destinationAccount.getAccount_id(), amount, sourceAccount.getAccount_number());
+                destinationAccount.getAccountId(), amount, sourceAccount.getAccountNumber());
 
         transactionRepository.save(transactionMapper.toEntity(outgoingDTO));
         transactionRepository.save(transactionMapper.toEntity(incomingDTO));

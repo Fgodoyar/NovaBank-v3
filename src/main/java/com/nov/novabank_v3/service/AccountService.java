@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface AccountService {
-    AccountDTO createAccount(AccountDTO dto);
+    AccountDTO createAccount(Long customerId);
     List<AccountDTO> findByCustomerId(Long customerId);
     AccountDTO findByAccountNumber(String accountNumber);
     List<AccountDTO> findByCustomerIdWithTransactions(Long customerId);

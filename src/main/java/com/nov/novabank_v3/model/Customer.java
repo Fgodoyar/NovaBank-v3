@@ -19,7 +19,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
-    private Long customer_id;
+    private Long customerId;
 
     @Column
     private String customer_name;
@@ -33,18 +33,18 @@ public class Customer {
     @Column
     private String email;
 
-    @Column
-    private String phone_number;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
-    @Column
-    private LocalDateTime creation_date;
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     public Set<Account> accounts;
 
     @PrePersist
     public void prePersist() {
-        this.creation_date = LocalDateTime.now();
+        this.creationDate = LocalDateTime.now();
     }
 
 }
