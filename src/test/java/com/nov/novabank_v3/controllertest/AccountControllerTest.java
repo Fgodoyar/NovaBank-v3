@@ -50,12 +50,12 @@ public class AccountControllerTest {
     @BeforeEach
     void setUp() {
         accountDTO = AccountDTO.builder()
-                .account_id(1L)
-                .account_number("ES9121000000000000000002")
-                .account_holder("Juan Bartolomeo García")
+                .accountId(1L)
+                .accountNumber("ES9121000000000000000002")
+                .accountHolder("Juan Bartolomeo García")
                 .balance(new BigDecimal("1500.00"))
-                .creation_date(LocalDateTime.of(2026, 1, 1, 0, 0))
-                .customer_id(1L)
+                .creationDate(LocalDateTime.of(2026, 1, 1, 0, 0))
+                .customerId(1L)
                 .build();
     }
 
@@ -71,8 +71,8 @@ public class AccountControllerTest {
             mockMvc.perform(post("/api/accounts")
                             .param("customerId", "1"))
                     .andExpect(status().isCreated())
-                    .andExpect(jsonPath("$.account_id").value(1L))
-                    .andExpect(jsonPath("$.account_number").value("ES9121000000000000000002"));
+                    .andExpect(jsonPath("$.accountId").value(1L))
+                    .andExpect(jsonPath("$.accountNumber").value("ES9121000000000000000002"));
 
             verify(accountService).createAccount(1L);
         }
@@ -121,7 +121,7 @@ public class AccountControllerTest {
 
             mockMvc.perform(get("/api/accounts/number/ES9121000000000000000002"))
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.account_number").value("ES9121000000000000000002"));
+                    .andExpect(jsonPath("$.accountNumber").value("ES9121000000000000000002"));
 
             verify(accountService).findByAccountNumber("ES9121000000000000000002");
         }
@@ -150,7 +150,7 @@ public class AccountControllerTest {
             mockMvc.perform(get("/api/accounts/customer/1"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.length()").value(1))
-                    .andExpect(jsonPath("$[0].customer_id").value(1L));
+                    .andExpect(jsonPath("$[0].customerId").value(1L));
 
             verify(accountService).findByCustomerId(1L);
         }
@@ -179,7 +179,7 @@ public class AccountControllerTest {
             mockMvc.perform(get("/api/accounts/customer/1/transactions"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.length()").value(1))
-                    .andExpect(jsonPath("$[0].customer_id").value(1L));
+                    .andExpect(jsonPath("$[0].customerId").value(1L));
 
             verify(accountService).findByCustomerIdWithTransactions(1L);
         }

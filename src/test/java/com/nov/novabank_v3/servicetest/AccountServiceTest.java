@@ -8,6 +8,7 @@ import com.nov.novabank_v3.model.Account;
 import com.nov.novabank_v3.model.Customer;
 import com.nov.novabank_v3.repository.AccountRepository;
 import com.nov.novabank_v3.repository.CustomerRepository;
+import com.nov.novabank_v3.service.AccountServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -70,11 +71,11 @@ public class AccountServiceTest {
                 .build();
 
         accountDTO = AccountDTO.builder()
-                .account_id(1L)
-                .account_number(accountNumber)
-                .account_holder("Pepillo")
+                .accountId(1L)
+                .accountNumber(accountNumber)
+                .accountHolder("Pepillo")
                 .balance(BigDecimal.ZERO)
-                .customer_id(customerId)
+                .customerId(customerId)
                 .build();
     }
 

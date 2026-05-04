@@ -66,12 +66,12 @@ public class OperationControllerTest {
     @BeforeEach
     void setUp() {
         transactionDTO = TransactionDTO.builder()
-                .transaction_id(1L)
-                .transaction_type("transaccion_entrante")
+                .transactionId(1L)
+                .transactionType("transaccion_entrante")
                 .amount(new BigDecimal("500.00"))
                 .description("Operación realizada")
-                .creation_date(LocalDateTime.of(2026, 1, 1, 0, 0))
-                .account_id(1L)
+                .creationDate(LocalDateTime.of(2026, 1, 1, 0, 0))
+                .accountId(1L)
                 .build();
     }
 
@@ -88,7 +88,7 @@ public class OperationControllerTest {
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(VALID_OPERATION_JSON))
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.transaction_id").value(1L))
+                    .andExpect(jsonPath("$.transactionId").value(1L))
                     .andExpect(jsonPath("$.amount").value(500.00));
 
             verify(operationService).deposit(any(), any());
@@ -144,7 +144,7 @@ public class OperationControllerTest {
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(VALID_OPERATION_JSON))
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.transaction_id").value(1L))
+                    .andExpect(jsonPath("$.transactionId").value(1L))
                     .andExpect(jsonPath("$.amount").value(500.00));
 
             verify(operationService).withdraw(any(), any());

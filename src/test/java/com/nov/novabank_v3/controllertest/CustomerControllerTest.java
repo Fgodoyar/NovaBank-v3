@@ -47,13 +47,13 @@ public class CustomerControllerTest {
 
     private static final String VALID_JSON = """
             {
-              "customer_id": 1,
+              "customerId": 1,
               "customer_name": "Juan Bartolomeo García",
               "last_name": "García",
               "dni": "12345678A",
               "email": "juanbartolitogarcia@email.com",
-              "phone_number": "600123456",
-              "creation_date": "2026-01-01T00:00:00",
+              "phoneNumber": "600123456",
+              "creationDate": "2026-01-01T00:00:00",
               "numberOfAccounts": 0
             }
             """;
@@ -61,13 +61,13 @@ public class CustomerControllerTest {
     @BeforeEach
     void setUp() {
         customerDTO = CustomerDTO.builder()
-                .customer_id(1L)
+                .customerId(1L)
                 .customer_name("Juan Bartolomeo")
                 .last_name("García")
                 .dni("12345678A")
                 .email("juanbartolitogarcia@email.com")
-                .phone_number("600123456")
-                .creation_date(LocalDateTime.of(2026, 1, 1, 0, 0))
+                .phoneNumber("600123456")
+                .creationDate(LocalDateTime.of(2026, 1, 1, 0, 0))
                 .numberOfAccounts(0)
                 .build();
     }
@@ -85,7 +85,7 @@ public class CustomerControllerTest {
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(VALID_JSON))
                     .andExpect(status().isCreated())
-                    .andExpect(jsonPath("$.customer_id").value(1L))
+                    .andExpect(jsonPath("$.customerId").value(1L))
                     .andExpect(jsonPath("$.dni").value("12345678A"));
 
             verify(customerService).createCustomer(any(CustomerDTO.class));
@@ -140,7 +140,7 @@ public class CustomerControllerTest {
             mockMvc.perform(get("/api/customers"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.length()").value(1))
-                    .andExpect(jsonPath("$[0].customer_id").value(1L))
+                    .andExpect(jsonPath("$[0].customerId").value(1L))
                     .andExpect(jsonPath("$[0].email").value("juanbartolitogarcia@email.com"));
 
             verify(customerService, times(1)).listCustomers();
@@ -169,7 +169,7 @@ public class CustomerControllerTest {
 
             mockMvc.perform(get("/api/customers/1"))
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.customer_id").value(1L))
+                    .andExpect(jsonPath("$.customerId").value(1L))
                     .andExpect(jsonPath("$.customer_name").value("Juan Bartolomeo"));
 
             verify(customerService).findById(1L);

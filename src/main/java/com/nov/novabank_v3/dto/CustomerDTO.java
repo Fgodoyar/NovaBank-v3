@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 public class CustomerDTO {
     @NotNull
-    private Long customer_id;
+    private Long customerId;
 
     @NotBlank(message = "El nombre del cliente es obligatorio.")
     @Schema(description = "Nombre sel cliente", example = "Carlos")
@@ -39,11 +39,11 @@ public class CustomerDTO {
     @NotBlank(message = "El número de teléfono es obligatorio.")
     @Pattern(regexp = "^[0-9]{9}$", message = "El formato del teléfono no es válido")
     @Schema(description = "Número de teléfono del cliente", example = "655432117")
-    private String phone_number;
+    private String phoneNumber;
 
     @NotNull
     @Schema(description = "Fecha de registro del cliente", example = "2026-04-18")
-    private LocalDateTime creation_date;
+    private LocalDateTime creationDate;
 
     @NotNull
     @PositiveOrZero

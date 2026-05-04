@@ -1,5 +1,6 @@
 package com.nov.novabank_v3.servicetest;
 
+import com.nov.novabank_v3.service.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;

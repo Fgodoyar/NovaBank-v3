@@ -2,12 +2,14 @@ package com.nov.novabank_v3.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class LoginResponseDTO {
 
     @Schema(description = "Credencial digital que devuelve el servidor después de realizar un login", example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...")

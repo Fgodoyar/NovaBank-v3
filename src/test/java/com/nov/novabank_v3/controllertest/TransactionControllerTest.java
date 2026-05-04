@@ -51,12 +51,12 @@ public class TransactionControllerTest {
     @BeforeEach
     void setUp() {
         transactionDTO = TransactionDTO.builder()
-                .transaction_id(1L)
-                .transaction_type("transaccion_entrante")
+                .transactionId(1L)
+                .transactionType("transaccion_entrante")
                 .amount(new BigDecimal("500.00"))
                 .description("Transferencia recibida")
-                .creation_date(LocalDateTime.of(2026, 1, 1, 0, 0))
-                .account_id(1L)
+                .creationDate(LocalDateTime.of(2026, 1, 1, 0, 0))
+                .accountId(1L)
                 .build();
     }
 
@@ -72,8 +72,8 @@ public class TransactionControllerTest {
             mockMvc.perform(get("/api/transactions/transaction/1"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.length()").value(1))
-                    .andExpect(jsonPath("$[0].transaction_id").value(1L))
-                    .andExpect(jsonPath("$[0].transaction_type").value("transaccion_entrante"));
+                    .andExpect(jsonPath("$[0].transactionId").value(1L))
+                    .andExpect(jsonPath("$[0].transactionType").value("transaccion_entrante"));
 
             verify(transactionService).findByAccountId(1L);
         }
@@ -118,7 +118,7 @@ public class TransactionControllerTest {
             mockMvc.perform(get("/api/transactions/account/1/dates/2026-01-01T00:00:00/2026-12-31T23:59:59"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.length()").value(1))
-                    .andExpect(jsonPath("$[0].transaction_id").value(1L));
+                    .andExpect(jsonPath("$[0].transactionId").value(1L));
 
             verify(transactionService).findByAccountIdAndCreationDateBetweenOrderByCreationDateDesc(
                     1L,

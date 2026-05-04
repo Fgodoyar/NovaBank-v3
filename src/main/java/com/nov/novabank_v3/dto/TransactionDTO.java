@@ -19,11 +19,11 @@ import java.time.LocalDateTime;
 public class TransactionDTO {
     @NotNull
     @Schema(description = "ID del movimiento")
-    private Long transaction_id;
+    private Long transactionId;
 
     @Schema(description = "Tipo de movimiento", example = "transaccion_entrante, transacción_saliente...")
     @NotBlank(message = "El tipo es obligatorio.")
-    private String transaction_type;
+    private String transactionType;
 
     @NotNull(message = "El saldo es obligatorio.")
     @Positive(message = "El importe debe ser superior a 0.")
@@ -36,17 +36,17 @@ public class TransactionDTO {
 
     @NotNull
     @Schema(description = "Fecha de creación del movimiento", example = "2026-06-23")
-    private LocalDateTime creation_date;
+    private LocalDateTime creationDate;
 
     @NotNull
     @Schema(description = "ID de la cuenta vinculada al movimiento")
-    private Long account_id;
+    private Long accountId;
 
-    public TransactionDTO(String transaction_type, BigDecimal amount, String description, LocalDateTime creation_date, Long account_id) {
-        this.transaction_type = transaction_type;
+    public TransactionDTO(String transactionType, BigDecimal amount, String description, LocalDateTime creationDate, Long accountId) {
+        this.transactionType = transactionType;
         this.amount = amount;
         this.description = description;
-        this.creation_date = creation_date;
-        this.account_id = account_id;
+        this.creationDate = creationDate;
+        this.accountId = accountId;
     }
 }

@@ -6,6 +6,7 @@ import com.nov.novabank_v3.model.Account;
 import com.nov.novabank_v3.model.Transaction;
 import com.nov.novabank_v3.repository.AccountRepository;
 import com.nov.novabank_v3.repository.TransactionRepository;
+import com.nov.novabank_v3.service.TransactionServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -64,11 +65,11 @@ public class TransactionServiceTest {
                 .build();
 
         transactionDTO = TransactionDTO.builder()
-                .transaction_id(1L)
-                .transaction_type("transaccion_entrante")
+                .transactionId(1L)
+                .transactionType("transaccion_entrante")
                 .amount(new BigDecimal("500.00"))
                 .description("Transferencia recibida")
-                .account_id(accountId)
+                .accountId(accountId)
                 .build();
     }
 

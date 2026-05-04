@@ -5,6 +5,7 @@ import com.nov.novabank_v3.exception.CustomerNotFoundException;
 import com.nov.novabank_v3.mapper.CustomerMapper;
 import com.nov.novabank_v3.model.Customer;
 import com.nov.novabank_v3.repository.CustomerRepository;
+import com.nov.novabank_v3.service.CustomerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -62,12 +63,12 @@ public class CustomerServiceTest {
                 .build();
 
         customerDTO = CustomerDTO.builder()
-                .customer_id(customerId)
+                .customerId(customerId)
                 .customer_name(name)
                 .last_name(lastName)
                 .dni(dni)
                 .email(email)
-                .phone_number(phone)
+                .phoneNumber(phone)
                 .build();
     }
 

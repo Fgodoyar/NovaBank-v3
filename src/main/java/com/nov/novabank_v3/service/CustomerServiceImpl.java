@@ -44,8 +44,8 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerRepository.existsByEmail(dto.getEmail()))
             throw new IllegalArgumentException("Ya existe un cliente con este email: " + dto.getEmail());
 
-        if (customerRepository.existsByPhoneNumber(dto.getPhone_number()))
-            throw new IllegalArgumentException("Ya existe un cliente con este número de teléfono: " + dto.getPhone_number());
+        if (customerRepository.existsByPhoneNumber(dto.getPhoneNumber()))
+            throw new IllegalArgumentException("Ya existe un cliente con este número de teléfono: " + dto.getPhoneNumber());
 
         Customer saved = customerRepository.save(customerMapper.toEntity(dto));
         return customerMapper.toDTO(saved);

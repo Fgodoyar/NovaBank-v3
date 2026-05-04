@@ -35,9 +35,9 @@ public class AccountServiceImpl implements AccountService {
         String accountNumber = generateAccountNumber();
 
         AccountDTO accountDTO = AccountDTO.builder()
-                .account_number(accountNumber)
-                .account_holder(customer.getCustomer_name())
-                .customer_id(customer.getCustomerId())
+                .accountNumber(accountNumber)
+                .accountHolder(customer.getCustomer_name())
+                .customerId(customer.getCustomerId())
                 .balance(BigDecimal.ZERO)
                 .build();
 
