@@ -4,6 +4,7 @@ import com.nov.novabank_v3.dto.CustomerDTO;
 import com.nov.novabank_v3.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class CustomerController {
     @GetMapping
     @Operation(summary = "Listar clientes", description = "Devuelve todos los clientes registrados.")
     @ApiResponse(responseCode = "200", description = "Lista de clientes obtenida")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
     public ResponseEntity<List<CustomerDTO>> listCustomers() {
         return ResponseEntity.ok(customerService.listCustomers());
     }

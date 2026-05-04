@@ -34,8 +34,8 @@ public class AccountRepositoryTest {
     @BeforeEach
     void setUp() {
         customer = Customer.builder()
-                .customer_name("Jonnas")
-                .last_name("Domingo")
+                .customerName("Jonnas")
+                .lastName("Domingo")
                 .dni("12345678A")
                 .email("jonnas@gmail.com")
                 .phoneNumber("600000001")
@@ -99,8 +99,8 @@ public class AccountRepositoryTest {
         @Test
         void shouldReturnEmptyListWhenCustomerHasNoAccounts() {
             Customer otherCustomer = Customer.builder()
-                    .customer_name("Jacinta")
-                    .last_name("Smit")
+                    .customerName("Jacinta")
+                    .lastName("Smit")
                     .dni("87654321B")
                     .email("jacinta@gmail.com")
                     .phoneNumber("600000002")
@@ -124,8 +124,8 @@ public class AccountRepositoryTest {
         @Test
         void shouldReturnFalseWhenCustomerHasNoAccount() {
             Customer otherCustomer = Customer.builder()
-                    .customer_name("Jacinta")
-                    .last_name("Smit")
+                    .customerName("Jacinta")
+                    .lastName("Smit")
                     .dni("87654321B")
                     .email("jacinta@gmail.com")
                     .phoneNumber("600000002")
@@ -150,8 +150,8 @@ public class AccountRepositoryTest {
         @Test
         void shouldReturnEmptyWhenCustomerHasNoAccounts() {
             Customer otherCustomer = Customer.builder()
-                    .customer_name("Jacinta")
-                    .last_name("Smit")
+                    .customerName("Jacinta")
+                    .lastName("Smit")
                     .dni("87654321B")
                     .email("jacinta@gmail.com")
                     .phoneNumber("600000002")

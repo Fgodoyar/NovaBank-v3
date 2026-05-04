@@ -34,7 +34,7 @@ public class Account {
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 

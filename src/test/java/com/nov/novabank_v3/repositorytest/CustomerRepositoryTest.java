@@ -25,8 +25,8 @@ public class CustomerRepositoryTest {
     @BeforeEach
     void setUp() {
         customer = Customer.builder()
-                .customer_name("Pepillo")
-                .last_name("Grillo")
+                .customerName("Pepillo")
+                .lastName("Grillo")
                 .dni("76543210A")
                 .email("pepeergrillo@email.com")
                 .phoneNumber("654789345")
@@ -102,8 +102,8 @@ public class CustomerRepositoryTest {
         @Test
         void save_shouldPersistCustomer() {
             Customer newCustomer = Customer.builder()
-                    .customer_name("Pepilla")
-                    .last_name("Grilla")
+                    .customerName("Pepilla")
+                    .lastName("Grilla")
                     .dni("12345678B")
                     .email("pepilla@email.com")
                     .phoneNumber("600000001")
@@ -118,8 +118,8 @@ public class CustomerRepositoryTest {
         @Test
         void save_shouldSetCreationDateAutomatically() {
             Customer newCustomer = Customer.builder()
-                    .customer_name("Pepilla")
-                    .last_name("Grilla")
+                    .customerName("Pepilla")
+                    .lastName("Grilla")
                     .dni("12345678B")
                     .email("pepilla@email.com")
                     .phoneNumber("600000001")

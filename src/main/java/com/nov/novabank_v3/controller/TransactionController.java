@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,8 +41,13 @@ public class TransactionController {
     @ApiResponse(responseCode = "200", description = "Transacciones obtenidas correctamente")
     @ApiResponse(responseCode = "404", description = "Cuenta no encontrada")
     public ResponseEntity<List<TransactionDTO>> findByAccountIdAndCreationDateBetweenOrderByCreationDateDesc
-            (@PathVariable("accountId") Long accountId, @PathVariable("startDate") LocalDateTime startDate,
-             @PathVariable("endDate") LocalDateTime endDate) {
-        return ResponseEntity.ok(transactionService.findByAccountIdAndCreationDateBetweenOrderByCreationDateDesc(accountId, startDate, endDate));
+            (@PathVariable("accountId") Long accountId,
+             @PathVariable("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+             @PathVariable("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+
+        LocalDateTime start = startDate.atStartOfDay();
+        LocalDateTime end = endDate.atTime(23, 59, 59);
+
+        return ResponseEntity.ok(transactionService.findByAccountIdAndCreationDateBetweenOrderByCreationDateDesc(accountId, start, end));
     }
 }

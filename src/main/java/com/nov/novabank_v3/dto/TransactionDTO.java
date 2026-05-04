@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class TransactionDTO {
-    @NotNull
+
     @Schema(description = "ID del movimiento")
     private Long transactionId;
 
@@ -34,11 +34,9 @@ public class TransactionDTO {
     @Schema(description = "Descripción del movimiento.")
     private String description;
 
-    @NotNull
     @Schema(description = "Fecha de creación del movimiento", example = "2026-06-23")
     private LocalDateTime creationDate;
 
-    @NotNull
     @Schema(description = "ID de la cuenta vinculada al movimiento")
     private Long accountId;
 

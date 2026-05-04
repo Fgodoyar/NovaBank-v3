@@ -54,8 +54,8 @@ public class CustomerServiceTest {
 
         customer = Customer.builder()
                 .customerId(customerId)
-                .customer_name(name)
-                .last_name(lastName)
+                .customerName(name)
+                .lastName(lastName)
                 .dni(dni)
                 .email(email)
                 .phoneNumber(phone)
@@ -64,8 +64,8 @@ public class CustomerServiceTest {
 
         customerDTO = CustomerDTO.builder()
                 .customerId(customerId)
-                .customer_name(name)
-                .last_name(lastName)
+                .customerName(name)
+                .lastName(lastName)
                 .dni(dni)
                 .email(email)
                 .phoneNumber(phone)
@@ -181,8 +181,8 @@ public class CustomerServiceTest {
         void listAll_shouldReturnCustomerList() {
             Customer customer2 = Customer.builder()
                     .customerId(2L)
-                    .customer_name("Pepilla")
-                    .last_name("Pili")
+                    .customerName("Pepilla")
+                    .lastName("Pili")
                     .dni("77654321L")
                     .email("pepilla54@gmail.com")
                     .phoneNumber("654789345")

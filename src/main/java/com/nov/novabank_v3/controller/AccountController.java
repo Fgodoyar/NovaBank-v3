@@ -26,8 +26,9 @@ public class AccountController {
     @ApiResponse(responseCode = "201", description = "Cuenta creada correctamente")
     @ApiResponse(responseCode = "400", description = "El cliente ya tiene una cuenta registrada")
     @ApiResponse(responseCode = "404", description = "Cliente no encontrado")
-    public ResponseEntity<AccountDTO> createAccount(@RequestParam Long customerId) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(accountService.createAccount(customerId));
+    public ResponseEntity<AccountDTO> createAccount(@RequestBody AccountDTO accountDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(accountService.createAccount(accountDTO.getCustomerId()));
     }
 
     @GetMapping("/customer/{customerId}")

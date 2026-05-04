@@ -14,16 +14,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class CustomerDTO {
-    @NotNull
+
     private Long customerId;
 
     @NotBlank(message = "El nombre del cliente es obligatorio.")
     @Schema(description = "Nombre sel cliente", example = "Carlos")
-    private String customer_name;
+    private String customerName;
 
     @NotBlank(message = "Los apellidos del cliente son obligatorios.")
     @Schema(description = "Apellidos del cliente", example = "Godoy Sanchez")
-    private String last_name;
+    private String lastName;
 
     @NotBlank(message = "El Documento de identificación es obligatorio.")
     @Size(max = 9, message = "El documento de identificación debe tener 9 caracteres.")
@@ -41,13 +41,7 @@ public class CustomerDTO {
     @Schema(description = "Número de teléfono del cliente", example = "655432117")
     private String phoneNumber;
 
-    @NotNull
     @Schema(description = "Fecha de registro del cliente", example = "2026-04-18")
     private LocalDateTime creationDate;
-
-    @NotNull
-    @PositiveOrZero
-    @Schema(description = "Número de cuentas del cliente")
-    private int numberOfAccounts;
 
 }

@@ -54,8 +54,8 @@ public class AccountServiceTest {
 
         customer = Customer.builder()
                 .customerId(customerId)
-                .customer_name("Pepillo")
-                .last_name("Grillo")
+                .customerName("Pepillo")
+                .lastName("Grillo")
                 .dni("76543210A")
                 .email("pepeergrillo@email.com")
                 .phoneNumber("654789345")

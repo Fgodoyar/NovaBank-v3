@@ -26,7 +26,7 @@ public class OperationController {
         return ResponseEntity.ok(operationService.deposit(dto.getAccountNumber(), dto.getAmount()));
     }
 
-    @PostMapping("/withdrawal")
+    @PostMapping("/withdraw")
     public ResponseEntity<TransactionDTO> withdrawal(@Valid @RequestBody OperationDTO dto) {
         return ResponseEntity.ok(operationService.withdraw(dto.getAccountNumber(), dto.getAmount()));
     }

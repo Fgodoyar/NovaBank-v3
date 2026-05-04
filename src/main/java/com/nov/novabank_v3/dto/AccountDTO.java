@@ -18,24 +18,20 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class AccountDTO {
-    @NotNull
+
     private Long accountId;
 
-    @NotBlank(message = "El número de cuenta es obligatorio.")
     @Size(min = 10, max = 34, message = "El número de cuenta debe tener entre 10 y 34 caracteres.")
     @Schema(description = "Número de la cuenta", example = "ES9121000000000000000002")
     private String accountNumber;
 
-    @NotBlank(message = "El nombre del titular es obligatorio.")
     @Schema(description = "Nombre del titular de la cuenta", example = "Carlos")
     private String accountHolder;
 
-    @NotNull(message = "El saldo es obligatorio.")
     @PositiveOrZero(message = "El sueldo no puede ser negativo.")
     @Schema(description = "Saldo disponible de la cuenta")
     private BigDecimal balance;
 
-    @NotNull
     @Schema(description = "Fecha de creación de la cuenta", example = "2026-05-18")
     private LocalDateTime creationDate;
 

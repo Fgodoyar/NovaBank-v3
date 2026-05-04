@@ -19,7 +19,6 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final AccountRepository accountRepository;
-    private final TransactionMapper transactionMapper;
 
     @Transactional(readOnly = true)
     @Override
@@ -27,13 +26,20 @@ public class TransactionServiceImpl implements TransactionService {
         Account account = accountRepository.findByAccountId(accountId)
                 .orElseThrow(() -> new IllegalArgumentException("No se encontró la cuenta con el ID: " + accountId));
         return transactionRepository.findByAccount_AccountId(account.getAccountId()).stream()
-                .map(transactionMapper::toDTO)
+                .map(transaction -> TransactionDTO.builder()
+                        .transactionId(transaction.getTransactionId())
+                        .transactionType(transaction.getTransactionType())
+                        .amount(transaction.getAmount())
+                        .description(transaction.getDescription())
+                        .creationDate(transaction.getCreationDate())
+                        .accountId(transaction.getAccount() != null ? transaction.getAccount().getAccountId() : null)
+                        .build())
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<TransactionDTO> findByAccountIdAndCreationDateBetweenOrderByCreationDateDesc(Long accountId, LocalDateTime startDate, LocalDateTime endDate){
+    public List<TransactionDTO> findByAccountIdAndCreationDateBetweenOrderByCreationDateDesc(Long accountId, LocalDateTime startDate, LocalDateTime endDate) {
         Account account = accountRepository.findByAccountId(accountId)
                 .orElseThrow(() -> new IllegalArgumentException("No se encontró la cuenta con el ID: " + accountId));
 
@@ -42,7 +48,14 @@ public class TransactionServiceImpl implements TransactionService {
         }
 
         return transactionRepository.findByAccount_AccountIdAndCreationDateBetweenOrderByCreationDateDesc(account.getAccountId(), startDate, endDate).stream()
-                .map(transactionMapper::toDTO)
+                .map(transaction -> TransactionDTO.builder()
+                        .transactionId(transaction.getTransactionId())
+                        .transactionType(transaction.getTransactionType())
+                        .amount(transaction.getAmount())
+                        .description(transaction.getDescription())
+                        .creationDate(transaction.getCreationDate())
+                        .accountId(transaction.getAccount() != null ? transaction.getAccount().getAccountId() : null)
+                        .build())
                 .collect(Collectors.toList());
     }
 }

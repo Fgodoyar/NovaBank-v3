@@ -21,11 +21,11 @@ public class Customer {
     @Column(name = "customer_id")
     private Long customerId;
 
-    @Column
-    private String customer_name;
+    @Column(name = "customer_name")
+    private String customerName;
 
-    @Column
-    private String last_name;
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column
     private String dni;

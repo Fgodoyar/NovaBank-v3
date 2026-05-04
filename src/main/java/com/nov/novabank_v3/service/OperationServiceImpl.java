@@ -35,8 +35,9 @@ public class OperationServiceImpl implements OperationService {
         accountRepository.save(account);
 
         TransactionDTO transactionDTO = TransactionFactory.createDeposit(account.getAccountId(), amount);
-        transactionRepository.save(transactionMapper.toEntity(transactionDTO));
+        var saved = transactionRepository.save(transactionMapper.toEntity(transactionDTO));
 
+        transactionDTO.setTransactionId(saved.getTransactionId());
         return transactionDTO;
     }
 
@@ -57,8 +58,9 @@ public class OperationServiceImpl implements OperationService {
         accountRepository.save(account);
 
         TransactionDTO transactionDTO = TransactionFactory.createWithdrawal(account.getAccountId(), amount);
-        transactionRepository.save(transactionMapper.toEntity(transactionDTO));
+        var saved = transactionRepository.save(transactionMapper.toEntity(transactionDTO));
 
+        transactionDTO.setTransactionId(saved.getTransactionId());
         return transactionDTO;
     }
 
@@ -88,12 +90,13 @@ public class OperationServiceImpl implements OperationService {
 
         TransactionDTO outgoingDTO = TransactionFactory.createOutgoingTransfer(
                 sourceAccount.getAccountId(), amount, destinationAccount.getAccountNumber());
+        var savedOutgoing = transactionRepository.save(transactionMapper.toEntity(outgoingDTO));
+        outgoingDTO.setTransactionId(savedOutgoing.getTransactionId());
 
         TransactionDTO incomingDTO = TransactionFactory.createIncomingTransfer(
                 destinationAccount.getAccountId(), amount, sourceAccount.getAccountNumber());
-
-        transactionRepository.save(transactionMapper.toEntity(outgoingDTO));
-        transactionRepository.save(transactionMapper.toEntity(incomingDTO));
+        var savedIncoming = transactionRepository.save(transactionMapper.toEntity(incomingDTO));
+        incomingDTO.setTransactionId(savedIncoming.getTransactionId());
 
         return List.of(outgoingDTO, incomingDTO);
     }

@@ -38,8 +38,8 @@ class TransactionRepositoryTest {
     void setUp() {
 
         Customer customer = Customer.builder()
-                .customer_name("Juan")
-                .last_name("Perez")
+                .customerName("Juan")
+                .lastName("Perez")
                 .dni("12345678A")
                 .email("juan@gmail.com")
                 .phoneNumber("600000000")

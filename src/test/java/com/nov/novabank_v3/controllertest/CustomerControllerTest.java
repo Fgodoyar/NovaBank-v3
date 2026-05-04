@@ -48,8 +48,8 @@ public class CustomerControllerTest {
     private static final String VALID_JSON = """
             {
               "customerId": 1,
-              "customer_name": "Juan Bartolomeo García",
-              "last_name": "García",
+              "customerName": "Juan Bartolomeo García",
+              "lastName": "García",
               "dni": "12345678A",
               "email": "juanbartolitogarcia@email.com",
               "phoneNumber": "600123456",
@@ -62,13 +62,12 @@ public class CustomerControllerTest {
     void setUp() {
         customerDTO = CustomerDTO.builder()
                 .customerId(1L)
-                .customer_name("Juan Bartolomeo")
-                .last_name("García")
+                .customerName("Juan Bartolomeo")
+                .lastName("García")
                 .dni("12345678A")
                 .email("juanbartolitogarcia@email.com")
                 .phoneNumber("600123456")
                 .creationDate(LocalDateTime.of(2026, 1, 1, 0, 0))
-                .numberOfAccounts(0)
                 .build();
     }
 
@@ -170,7 +169,7 @@ public class CustomerControllerTest {
             mockMvc.perform(get("/api/customers/1"))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.customerId").value(1L))
-                    .andExpect(jsonPath("$.customer_name").value("Juan Bartolomeo"));
+                    .andExpect(jsonPath("$.customerName").value("Juan Bartolomeo"));
 
             verify(customerService).findById(1L);
         }
